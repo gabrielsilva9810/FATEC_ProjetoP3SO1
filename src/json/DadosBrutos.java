@@ -4,7 +4,7 @@ public class DadosBrutos {
 	
 	public String name;
     public String unit;
-    public Double value;
+    public String value; //double
     public String type;
      
     //-------------------------NAME------------------------------//
@@ -28,11 +28,11 @@ public class DadosBrutos {
     //--------------------------------------------------------//
     //----------------------------VALUE---------------------------//
 
-    public Double getValue() {
+    public String getValue() {
         return value;
     }
 
-    public void setValue(Double value) {
+    public void setValue(String value) {
         this.value = value;
     }
     //--------------------------------------------------------//
@@ -48,7 +48,12 @@ public class DadosBrutos {
     //--------------------------------------------------------//
 	@Override
 	public String toString() {
-		return "dadosBrutos [name=" + name + ", unit=" + unit + ", value=" + value + ", type=" + type + "]";
+		return "dadosBrutos"
+				+ "[name=" + name 
+				+ ", unit=" + unit 
+				+ ", value=" + value 
+				+ ", type=" + type 
+				+ "]";
 	}
     
 }

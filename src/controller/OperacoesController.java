@@ -12,61 +12,63 @@ public class OperacoesController {
 	public OperacoesController() {
 		super();
 	}
-	
-	//------------ LENDO DIRETORIO ---------------
-	public void lerDiretorio(String caminho, String arquivo) throws Exception{
+
+	// ------------ LENDO DIRETORIO ------------------------------------------------///
+	public void lerDiretorio(String caminho, String arquivo, String digitado) throws Exception {
 		File arq = new File(caminho, arquivo);
-		
-		
+
 		if (arq.exists() && arq.isFile()) {
 			FileInputStream fluxo = new FileInputStream(arq);
 			InputStreamReader leFluxo = new InputStreamReader(fluxo);
 			BufferedReader buffer = new BufferedReader(leFluxo);
 			String linha = buffer.readLine();
-			
-			while(linha != null) {				
+
+			while (linha != null) {
+				
+				// ---------------NAME---------------------------------------------///
+				if (linha.contains("name")) {
+
+					DadosBrutos db = new DadosBrutos();
+					String[] vetWord = linha.split(": ");
+					db.name = vetWord[1].substring(1, vetWord[1].length() - 2);
+					linha = buffer.readLine();
+
+					// ---------------UNIDADE----------------------------------------///
+					if (linha.contains("unit")) {
+						vetWord = linha.split(": ");
+						db.unit = vetWord[1].substring(1, vetWord[1].length() - 2);
+						linha = buffer.readLine();
+
+
+						// -----------------VALUE--------------------------------------///
+						if (linha.contains("value")) {
+							vetWord = linha.split(": ");
+							db.value = vetWord[1].substring(0, vetWord[1].length() - 1);
+							linha = buffer.readLine();
+
+							// -----------------TYPE--------------------------------------///
+							if (linha.contains("type")) {
+								vetWord = linha.split(": ");
+								db.type = vetWord[1].substring(1);
+
+								//System.out.println(db);
+							}
+						}
+					}
+
+					//PEGA VALOR DIGITADO E PROCURA NO CÓDIGO
+					if(db.unit.equals(digitado)) {
+						System.out.println(db);
+					}
+				}
+				
 				linha = buffer.readLine();
-				//separarUnit(linha);
-				System.out.println(linha);
-				
-				
-//				DadosBrutos db = new DadosBrutos();
-//				String[] vetorPalavras = linha.split(":");
-//				System.err.println(vetorPalavras[1]);
-//				db.name = vetorPalavras[1];
-				
-				
-//				linha = buffer.readLine();
-//				System.out.println(linha);
-//				
-//				
-//				String[] vetPalavra = linha.split(":");
-//				System.err.println(vetPalavra[0]);
-//				db.unit = vetPalavra[0];
-//				
-				//System.out.println(db);
-				
+
 			}
-			
+
 			buffer.close();
 			leFluxo.close();
 			fluxo.close();
-		}		
-	}
-	
-	//----------------------- SEPARANDO UNIT ---------------------------
-	public void separarUnit(String linha) {
-		if(linha.contains("name")) {
-			DadosBrutos db = new DadosBrutos();
-			String[] vetorPalavras = linha.split(":");
-			System.err.println(vetorPalavras[1]);
-			db.name = vetorPalavras[1];
-			System.out.println(db);
 		}
-		
 	}
-
 }
-
-	
-
