@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-
 import json.DadosBrutos;
 
 public class OperacoesController {
@@ -13,7 +12,7 @@ public class OperacoesController {
 		super();
 	}
 
-	// ------------ LENDO DIRETORIO ------------------------------------------------///
+	// ------------ LENDO DIRETORIO ----------------------------------------------------------///
 	public void lerDiretorio(String caminho, String arquivo, String digitado) throws Exception {
 		File arq = new File(caminho, arquivo);
 
@@ -25,7 +24,7 @@ public class OperacoesController {
 
 			while (linha != null) {
 				
-				// ---------------NAME---------------------------------------------///
+				// ---------------NAME-----------------------------------------------------///
 				if (linha.contains("name")) {
 
 					DadosBrutos db = new DadosBrutos();
@@ -33,17 +32,18 @@ public class OperacoesController {
 					db.name = vetWord[1].substring(1, vetWord[1].length() - 2);
 					linha = buffer.readLine();
 
-					// ---------------UNIDADE----------------------------------------///
+					// ---------------UNIDADE----------------------------------------------///
 					if (linha.contains("unit")) {
 						vetWord = linha.split(": ");
 						db.unit = vetWord[1].substring(1, vetWord[1].length() - 2);
 						linha = buffer.readLine();
 
 
-						// -----------------VALUE--------------------------------------///
+						// -----------------VALUE-----------------------------------------///
 						if (linha.contains("value")) {
 							vetWord = linha.split(": ");
-							db.value = vetWord[1].substring(0, vetWord[1].length() - 1);
+							String convertDouble = vetWord[1].substring(0, vetWord[1].length() - 1);
+							db.value = Double.parseDouble(convertDouble);
 							linha = buffer.readLine();
 
 							// -----------------TYPE--------------------------------------///
@@ -51,12 +51,13 @@ public class OperacoesController {
 								vetWord = linha.split(": ");
 								db.type = vetWord[1].substring(1);
 
+								//TESTE - rodando todos
 								//System.out.println(db);
 							}
 						}
 					}
 
-					//PEGA VALOR DIGITADO E PROCURA NO CÓDIGO
+					//PEGA VALOR DIGITADO E PROCURAR NO CÓDIGO
 					if(db.unit.equals(digitado)) {
 						System.out.println(db);
 					}

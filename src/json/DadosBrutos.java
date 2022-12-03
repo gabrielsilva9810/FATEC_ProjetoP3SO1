@@ -4,7 +4,7 @@ public class DadosBrutos {
 	
 	public String name;
     public String unit;
-    public String value; //double
+    public Double value;
     public String type;
      
     //-------------------------NAME------------------------------//
@@ -28,11 +28,11 @@ public class DadosBrutos {
     //--------------------------------------------------------//
     //----------------------------VALUE---------------------------//
 
-    public String getValue() {
+    public Double getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public void setValue(Double value) {
         this.value = value;
     }
     //--------------------------------------------------------//
