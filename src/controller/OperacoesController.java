@@ -51,7 +51,7 @@ public class OperacoesController {
 								vetWord = linha.split(": ");
 								db.type = vetWord[1].substring(1);
 
-								//TESTE - rodando todos
+								//TESTE PARA EXIBIR TODOS
 								//System.out.println(db);
 							}
 						}
